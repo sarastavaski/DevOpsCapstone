@@ -6,14 +6,14 @@
 # Step 1:
 # Create dockerpath
 # dockerpath=<your docker ID/path>
-dockerpath=sarastavaski/simple-index:v3
+dockerpath=sarastavaski/capstone-containter
 
 # Step 2:  
 # Authenticate & tag
 echo "Docker ID and Image: $dockerpath"
-docker login --username sarastavaski
-docker tag simple-index:v3 $dockerpath
+docker login --username $1 --password $2
+docker tag capstone-containter:latest $dockerpath:v1
 
 # Step 3:
 # Push image to a docker repository
-docker push $dockerpath
+docker push $dockerpath:v1 

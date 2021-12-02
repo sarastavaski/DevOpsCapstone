@@ -5,6 +5,18 @@ orbs:
   aws-eks: circleci/aws-eks@1.1.0
 
 jobs:
+  # build docker image 
+  build-docker:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: build and upload docker container
+          no_output_timeout: 10m
+          command: |
+            ./run_docker.sh
+            ./upload_docker.sh ${DOCKER_USERNAME} ${DOCKER_PASSWORD} ${DOCKERTAG_VERSION}
+
   # create kubernetes cluster 
   create-small-cluster:
     executor: aws-eks/python3
@@ -108,6 +120,12 @@ workflows:
           requires:
             - create-service
 
+
+
+
+
+
+            
   #     - aws-eks/create-cluster:
   #         cluster-name: my-eks-demo
   #     - test-cluster:
