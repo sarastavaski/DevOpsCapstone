@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: simple-html-rolling-update
+  name: capstone-rolling-update
   labels: 
-    app: simple-html-app
+    app: capstone-html-app
 spec:
-  replicas: 4
+  replicas: 1
   selector:
     matchLabels:
       app: simple-html-app

@@ -12,7 +12,7 @@ dockerpath=sarastavaski/simple-index:v3
 # Authenticate & tag
 echo "Docker ID and Image: $dockerpath"
 docker login --username sarastavaski
-docker tag simple-index:v2 $dockerpath
+docker tag simple-index:v3 $dockerpath
 
 # Step 3:
 # Push image to a docker repository

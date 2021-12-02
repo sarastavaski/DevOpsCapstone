@@ -5,6 +5,7 @@ orbs:
   aws-eks: circleci/aws-eks@1.1.0
 
 jobs:
+  # create kubernetes cluster 
   create-small-cluster:
     executor: aws-eks/python3
     parameters:
@@ -41,6 +42,7 @@ jobs:
           ssh-access: false
           ssh-public-key: ''
 
+  # run service.yml to create load blaancer 
   create-service:
     executor: aws-eks/python3
     parameters:
@@ -57,6 +59,7 @@ jobs:
           resource-file-path: service.yml
           resource-name: service-rollingLB
 
+  # run deployment.yml to create rolling update deployment
   create-deployment:
     executor: aws-eks/python3
     parameters:
@@ -72,7 +75,7 @@ jobs:
       - kubernetes/create-or-update-resource:
           get-rollout-status: true
           resource-file-path: deployment.yml
-          resource-name: deployment-v1
+          resource-name: deployment/capstone-rolling-update
 
 
 
