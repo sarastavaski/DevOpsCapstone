@@ -92,8 +92,7 @@ jobs:
   #         command: |
   #           kubectl get services
   #         name: Test cluster
-# not up to date 
-# push this pls
+# chnaged the aws region in circleci env variables
 
 workflows:
   deployment:
