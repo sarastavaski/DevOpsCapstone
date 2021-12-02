@@ -101,13 +101,13 @@ workflows:
   deployment:
     jobs:
       - create-small-cluster:
-          cluster-name: capstone-cluster
+          cluster-name: capstone-deployment
       - create-service:
-          cluster-name: capstone-cluster
+          cluster-name: capstone-deployment
           requires:
             - create-small-cluster
       - create-deployment:
-          cluster-name: capstone-cluster
+          cluster-name: capstone-deployment
           requires:
             - create-service
 
