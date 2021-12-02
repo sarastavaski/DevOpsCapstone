@@ -3,8 +3,6 @@ version: 2.1
 orbs:
   kubernetes: circleci/kubernetes@0.4.0 
   aws-eks: circleci/aws-eks@1.1.0
-  
-
 
 jobs:
   create-small-cluster:
