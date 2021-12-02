@@ -104,28 +104,29 @@ jobs:
   #         command: |
   #           kubectl get services
   #         name: Test cluster
-# chnaged the aws region in circleci env variables
 
+  
 workflows:
   deployment:
     jobs:
-      - create-small-cluster:
-          cluster-name: capstone-deployment
-      - create-service:
-          cluster-name: capstone-deployment
-          requires:
-            - create-small-cluster
-      - create-deployment:
-          cluster-name: capstone-deployment
-          requires:
-            - create-service
+      - build-docker
+      # - create-small-cluster:
+      #     cluster-name: capstone-deployment
+      # - create-service:
+      #     cluster-name: capstone-deployment
+      #     requires:
+      #       - create-small-cluster
+      # - create-deployment:
+      #     cluster-name: capstone-deployment
+      #     requires:
+      #       - create-service
 
 
 
 
 
 
-            
+
   #     - aws-eks/create-cluster:
   #         cluster-name: my-eks-demo
   #     - test-cluster:
