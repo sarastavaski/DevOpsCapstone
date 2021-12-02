@@ -5,7 +5,7 @@ metadata:
   labels: 
     app: simple-html-app
 spec:
-  replicas: 1
+  replicas: 4
   selector:
     matchLabels:
       app: simple-html-app
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: simple-html-container
-        image: sarastavaski/simple-index
+        image: sarastavaski/simple-index:v3
         imagePullPolicy: "Always"
         ports:
         - containerPort: 80
