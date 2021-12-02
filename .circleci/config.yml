@@ -77,10 +77,6 @@ jobs:
           resource-file-path: deployment.yml
           resource-name: deployment/capstone-rolling-update
 
-
-
-
-
   # test-cluster:
   #   executor: aws-eks/python3
   #   parameters:
