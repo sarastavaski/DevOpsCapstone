@@ -92,10 +92,9 @@ jobs:
   #         command: |
   #           kubectl get services
   #         name: Test cluster
+# not up to date 
+# push this pls
 
-
-
-  
 workflows:
   deployment:
     jobs:
