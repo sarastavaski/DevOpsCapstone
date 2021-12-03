@@ -166,7 +166,7 @@ workflows:
       - test-cluster:
           cluster-name: capstone-deployment
           requires:
-            - reate-small-cluster
+            - create-small-cluster
       - build-docker:
           requires:
             - test-cluster
