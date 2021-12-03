@@ -28,7 +28,8 @@ jobs:
           name: run lint
           command: |
             . venv/bin/activate
-            make lint
+            hadolint --ignore DL3003 --ignore DL3006 <Dockerfile>
+            # make lint
       - run: 
           name: run tests
           command: |
