@@ -30,11 +30,11 @@ jobs:
             . venv/bin/activate
             hadolint --ignore DL3003 --ignore DL3006 Dockerfile
             # make lint
-      - run: 
-          name: run tests
-          command: |
-            . venv/bin/activate
-            make test
+      # - run: 
+      #     name: run tests
+      #     command: |
+      #       . venv/bin/activate
+      #       make test
       - save_cache:
           paths:
             - ./venv
