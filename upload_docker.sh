@@ -11,9 +11,10 @@ dockerpath=sarastavaski/capstone-containter
 # Step 2:  
 # Authenticate & tag
 echo "Docker ID and Image: $dockerpath"
-docker login --username $1 --password $2
-docker tag capstone-containter:latest $dockerpath:v1
+docker login --username sarastavaski --password Dcsd143398!!
+#docker login --username $1 --password $2
+#docker tag capstone-containter:latest $dockerpath:v1
 
 # Step 3:
 # Push image to a docker repository
-docker push $dockerpath:v1 
+docker push $dockerpath
