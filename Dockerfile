@@ -7,11 +7,9 @@ RUN rm /usr/share/nginx/html/index.html
 # Copy source code to working directory
 COPY index.html /usr/share/nginx/html
 
-## Step 3:
-# Install packages from requirements.txt
+
 # hadolint ignore=DL3013
-RUN pip install --upgrade pip &&\
-    pip install --trusted-host pypi.python.org -r requirements.txt
+# hadolint ignore=DL3006
 
 ## Step 4:
 # Expose port 80
