@@ -68,11 +68,17 @@ jobs:
     steps:
       - checkout
       - run:
-          name: build and upload docker container
+          name: build docker container
           no_output_timeout: 30m
           command: |
             ./run_docker.sh
-            ./upload_docker.sh ${DOCKER_USERNAME} ${DOCKER_PASSWORD} ${DOCKERTAG_VERSION}
+      - run:
+          name: upload docker container
+          no_output_timeout: 30m
+          command: |
+
+            # ./upload_docker.sh ${DOCKER_USERNAME} ${DOCKER_PASSWORD} ${DOCKERTAG_VERSION}
+            ./upload_docker.sh ${DOCKER_USERNAME} ${DOCKER_PASSWORD}
 
   # create kubernetes cluster 
   create-small-cluster:
