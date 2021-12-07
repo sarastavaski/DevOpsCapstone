@@ -69,7 +69,7 @@ jobs:
       - checkout
       - run:
           name: build docker container
-          no_output_timeout: 30m
+          #no_output_timeout: 30m
           command: |
             ./run_docker.sh
       - run:
