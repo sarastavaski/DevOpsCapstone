@@ -5,15 +5,13 @@ orbs:
   aws-eks: circleci/aws-eks@1.1.0
 
 jobs:
+  # lint Dockerfile with hadolint
+  # lint index.html with htmlhint
   build:
     docker:
       - image: python:3.7-alpine3.11
     steps:
       - checkout
-      # - restore_cache:
-      #     keys: 
-      #     - v1-dependencies-{{ checksum "requirements.txt" }}
-      #     - v1-dependencies-
       - run: 
           name: install dependencies
           command: |
@@ -114,40 +112,56 @@ jobs:
           ssh-access: false
           ssh-public-key: ''
 
-  # run service.yml to create load blaancer 
+  # # run service.yml to create load blaancer 
+  # service:
+  #   executor: aws-eks/python3
+  #   parameters:
+  #     cluster-name:
+  #       description: |
+  #         The name of the EKS cluster
+  #       type: string
+  #   steps:
+  #     - checkout
+  #     - aws-eks/update-kubeconfig-with-authenticator:
+  #         cluster-name: << parameters.cluster-name >>
+  #         install-kubectl: true
+  #     - kubernetes/create-or-update-resource:
+  #         resource-file-path: service.yml
+  #         resource-name: deployment/capstone-rolling-update
+
+  # # run deployment.yml to create rolling update deployment
+  # deployment:
+  #   executor: aws-eks/python3
+  #   parameters:
+  #     cluster-name:
+  #       description: |
+  #         The name of the EKS cluster
+  #       type: string
+  #   steps:
+  #     - checkout
+  #     - aws-eks/update-kubeconfig-with-authenticator:
+  #         cluster-name: << parameters.cluster-name >>
+  #         install-kubectl: true
+  #     - kubernetes/create-or-update-resource:
+  #         get-rollout-status: true
+  #         resource-file-path: deployment.yml
+  #         resource-name: deployment/capstone-rolling-update
+
   service:
     executor: aws-eks/python3
     parameters:
       cluster-name:
         description: |
-          The name of the EKS cluster
+          Name of the EKS cluster
         type: string
     steps:
-      - checkout
+      - kubernetes/install
       - aws-eks/update-kubeconfig-with-authenticator:
           cluster-name: << parameters.cluster-name >>
-          install-kubectl: true
-      - kubernetes/create-or-update-resource:
-          resource-file-path: service.yml
-          resource-name: deployment/capstone-rolling-update
-
-  # run deployment.yml to create rolling update deployment
-  deployment:
-    executor: aws-eks/python3
-    parameters:
-      cluster-name:
-        description: |
-          The name of the EKS cluster
-        type: string
-    steps:
-      - checkout
-      - aws-eks/update-kubeconfig-with-authenticator:
-          cluster-name: << parameters.cluster-name >>
-          install-kubectl: true
-      - kubernetes/create-or-update-resource:
-          get-rollout-status: true
-          resource-file-path: deployment.yml
-          resource-name: deployment/capstone-rolling-update
+      - run:
+          command: |
+            ./run_kubernetes.sh
+          name: Run Kubernetes
 
 
 
@@ -170,43 +184,19 @@ workflows:
           cluster-name: capstone-deployment
           requires:
             - create-small-cluster
-      - deployment:
-          cluster-name: capstone-deployment
-          requires:
-            - service
+      # - deployment:
+      #     cluster-name: capstone-deployment
+      #     requires:
+      #       - service
 
 
 
 
 
 
-
-  #     - aws-eks/create-cluster:
-  #         cluster-name: my-eks-demo
-  #     - test-cluster:
-  #         cluster-name: my-eks-demo
-  #         requires:
-  #           - aws-eks/create-cluster
 
   #     - aws-eks/delete-cluster:
   #         cluster-name: my-eks-demo
   #         requires:
   #           - test-cluster
 
-
-  # create-deployment:
-  #   executor: aws-eks/python3
-  #   parameters:
-  #     cluster-name:
-  #       description: |
-  #         Name of the EKS cluster
-  #       type: string
-  #   steps:
-  #     - checkout
-  #     - aws-eks/update-kubeconfig-with-authenticator:
-  #         cluster-name: << parameters.cluster-name >>
-  #         install-kubectl: true
-  #     - kubernetes/create-or-update-resource:
-  #         get-rollout-status: true
-  #         resource-file-path: tests/nginx-deployment/deployment.yaml
-  #         resource-name: deployment/nginx-deployment

@@ -18,3 +18,10 @@ kubectl apply -f deployment.yml
 
 # Create the service to make pods accessible
 kubectl apply -f service.yml
+
+# Get Container Name from current deployment
+kubectl get deployment capstone-containter 
+
+# Update Deployment - SHOULD WORK NOW
+# kubectl set image deployment/<Deployment-Name> <Container-Name>=<Container-Image> --record=true
+# kubectl set image deployment/my-first-deployment kubenginx=stacksimplify/kubenginx:2.0.0 --record=true
