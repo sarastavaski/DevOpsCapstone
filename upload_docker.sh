@@ -12,6 +12,7 @@ dockerpath=sarastavaski/capstone-containter
 # Authenticate & tag
 echo "Docker ID and Image: $dockerpath"
 docker login --username $1 --password $2
+docker tag capstone-containter $dockerpath 
 #docker tag capstone-containter:latest $dockerpath:v1
 
 # Step 3:
