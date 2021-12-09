@@ -16,6 +16,8 @@ docker login --username $1 --password $2
 docker tag capstone-containter $dockerpath
 #docker tag capstone-containter:v1 capstone-containter:v2
 #docker tag capstone-containter:latest $dockerpath:v1
+# adding something
+
 
 # Step 3:
 # Push image to a docker repository
