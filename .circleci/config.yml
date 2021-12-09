@@ -112,50 +112,60 @@ jobs:
           ssh-access: false
           ssh-public-key: ''
 
-  # # run service.yml to create load blaancer 
-  # service:
-  #   executor: aws-eks/python3
-  #   parameters:
-  #     cluster-name:
-  #       description: |
-  #         The name of the EKS cluster
-  #       type: string
-  #   steps:
-  #     - checkout
-  #     - aws-eks/update-kubeconfig-with-authenticator:
-  #         cluster-name: << parameters.cluster-name >>
-  #         install-kubectl: true
-  #     - kubernetes/create-or-update-resource:
-  #         resource-file-path: service.yml
-  #         resource-name: deployment/capstone-rolling-update
-
-  # # run deployment.yml to create rolling update deployment
-  # deployment:
-  #   executor: aws-eks/python3
-  #   parameters:
-  #     cluster-name:
-  #       description: |
-  #         The name of the EKS cluster
-  #       type: string
-  #   steps:
-  #     - checkout
-  #     - aws-eks/update-kubeconfig-with-authenticator:
-  #         cluster-name: << parameters.cluster-name >>
-  #         install-kubectl: true
-  #     - kubernetes/create-or-update-resource:
-  #         get-rollout-status: true
-  #         resource-file-path: deployment.yml
-  #         resource-name: deployment/capstone-rolling-update
-
+  # run service.yml to create load blaancer 
   service:
-    machine: true
+    executor: aws-eks/python3
+    parameters:
+      cluster-name:
+        description: |
+          The name of the EKS cluster
+        type: string
     steps:
       - checkout
+      - aws-eks/update-kubeconfig-with-authenticator:
+          cluster-name: << parameters.cluster-name >>
+          install-kubectl: true
+      - kubernetes/create-or-update-resource:
+          resource-file-path: service.yml
+          resource-name: deployment/capstone-rolling-update
+
+  # run deployment.yml to create rolling update deployment
+  deployment:
+    executor: aws-eks/python3
+    parameters:
+      cluster-name:
+        description: |
+          The name of the EKS cluster
+        type: string
+    steps:
+      - checkout
+      - aws-eks/update-kubeconfig-with-authenticator:
+          cluster-name: << parameters.cluster-name >>
+          install-kubectl: true
+      - kubernetes/create-or-update-resource:
+          get-rollout-status: true
+          resource-file-path: deployment.yml
+          resource-name: deployment/capstone-rolling-update
       - run:
-          name: create load balancer and deployment
-          no_output_timeout: 50m
           command: |
-            ./run_kubernetes.sh
+            kubectl get deployment capstone-rolling-update
+          name: Test cluster
+      - run:
+          command: |
+            kubectl get services capstone-rolling-update
+          name: Test cluster
+
+
+          
+  # service:
+  #   machine: true
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: create load balancer and deployment
+  #         no_output_timeout: 50m
+  #         command: |
+  #           ./run_kubernetes.sh
 
 
 workflows:
@@ -174,13 +184,13 @@ workflows:
           requires:
             - test-cluster
       - service:
-          #cluster-name: capstone-deployment
+          cluster-name: capstone-deployment
           requires:
             - create-small-cluster
-      # - deployment:
-      #     cluster-name: capstone-deployment
-      #     requires:
-      #       - service
+      - deployment:
+          cluster-name: capstone-deployment
+          requires:
+            - service
 
 
 
