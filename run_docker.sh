@@ -16,5 +16,3 @@ docker image ls
 # publish the container’s port to a host port
 #docker run -p 8000:80 capstone-containter
 docker run -d -p 8000:80 capstone-containter
-
-# docker run -d -p 8080:80 capstone-containter
