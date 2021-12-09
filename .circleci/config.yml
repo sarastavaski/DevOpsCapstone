@@ -74,6 +74,16 @@ jobs:
 
             # ./upload_docker.sh ${DOCKER_USERNAME} ${DOCKER_PASSWORD} ${DOCKERTAG_VERSION}
             ./upload_docker.sh ${DOCKER_USERNAME} ${DOCKER_PASSWORD}
+      - run:
+          name: test docker container
+          command: |
+            if curl -s localhost | grep "Hello"
+            then
+              exit 0
+            else
+              exit 1
+            fi
+            
 
   # create kubernetes cluster 
   create-small-cluster:
