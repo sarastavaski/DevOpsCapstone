@@ -18,4 +18,3 @@ docker image ls
 docker run -d -p 8000:80 capstone-containter
 
 # docker run -d -p 8080:80 capstone-containter
-docker pull capstone-containter

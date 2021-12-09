@@ -20,3 +20,4 @@ docker tag capstone-containter $dockerpath
 # Step 3:
 # Push image to a docker repository
 docker push capstone-containter
+docker pull capstone-containter
