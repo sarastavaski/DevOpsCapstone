@@ -174,7 +174,7 @@ workflows:
           requires:
             - test-cluster
       - service:
-          cluster-name: capstone-deployment
+          #cluster-name: capstone-deployment
           requires:
             - create-small-cluster
       # - deployment:
