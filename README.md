@@ -1,6 +1,6 @@
-#Udacity DevOps Capstone Project
+## Udacity DevOps Capstone Project
 
-###Steps
+### Steps
 1. Clone this repo and set up project in CircleCI
 2. Add CircleCI environment variables: AWS_ACCESS_KEY_ID, AWS_DEFAULT_REGION, AWS_SECRET_ACCESS_KEY, DOCKER_PASSWORD, DOCKER_USERNAME
 2. Run CI/CD in CircleCI pipeline with config.yml to deploy website version #1
@@ -8,7 +8,7 @@
 4. Run ./update_docker.sh--make sure to replace with your own AWS profile
 
 
-###File Content
+### File Content
 - **Config.yml:** CI/CD pipeline that deploys aws eks 
 - **deployment.yml:** creates rolling update deployment 
 - **service.yml:** creates ELB
