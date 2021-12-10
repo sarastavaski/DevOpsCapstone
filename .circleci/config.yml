@@ -74,12 +74,12 @@ jobs:
 
             # ./upload_docker.sh ${DOCKER_USERNAME} ${DOCKER_PASSWORD} ${DOCKERTAG_VERSION}
             ./upload_docker.sh ${DOCKER_USERNAME} ${DOCKER_PASSWORD}
-      - run:
-          name: start docker container for test
-          command: |
-            docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}
-            docker pull capstone-containter:latest
-            docker run -d -p 8000:80 capstone-containter:latest
+      # - run:
+      #     name: start docker container for test
+      #     command: |
+      #       docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}
+      #       docker pull capstone-containter:latest
+      #       docker run -d -p 8000:80 capstone-containter:latest
       - run:
           name: test docker container
           command: |
