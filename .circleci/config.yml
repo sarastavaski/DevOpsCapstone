@@ -80,15 +80,15 @@ jobs:
       #       docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}
       #       docker pull capstone-containter:latest
       #       docker run -d -p 8000:80 capstone-containter:latest
-      - run:
-          name: test docker container
-          command: |
-            if curl -s localhost | grep "Hello"
-            then
-              exit 0
-            else
-              exit 1
-            fi
+      # - run:
+      #     name: test docker container
+      #     command: |
+      #       if curl -s localhost | grep "Hello"
+      #       then
+      #         exit 0
+      #       else
+      #         exit 1
+      #       fi
             
 
   # create kubernetes cluster 
@@ -196,15 +196,6 @@ jobs:
             kubectl get services capstone-rolling-update
           name: Test cluster
           
-  # service:
-  #   machine: true
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: create load balancer and deployment
-  #         no_output_timeout: 50m
-  #         command: |
-  #           ./run_kubernetes.sh
 
 
 workflows:
