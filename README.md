@@ -9,10 +9,10 @@
 
 
 ###File Content
--**Config.yml:** CI/CD pipeline that deploys aws eks 
--**deployment.yml:** creates rolling update deployment 
--**service.yml:** creates ELB
--**Dockerfile:** instructions to assemble Docker image
--**./run_docker.sh:** builds image
--**./upload_docker.sh:** create docker path, authenticate and tag, and push image to docker repo
--**./update_docker:** build container with new index.html
+- **Config.yml:** CI/CD pipeline that deploys aws eks 
+- **deployment.yml:** creates rolling update deployment 
+- **service.yml:** creates ELB
+- **Dockerfile:** instructions to assemble Docker image
+- **./run_docker.sh:** builds image
+- **./upload_docker.sh:** create docker path, authenticate and tag, and push image to docker repo
+- **./update_docker:** build container with new index.html
