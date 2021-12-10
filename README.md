@@ -1,6 +1,6 @@
 # DevOpsCapstone
 Udacity DevOps Capstone Project
-1) Config.yml: CI/CD pipeline that deploys aws eks 
+**1) Config.yml: CI/CD pipeline that deploys aws eks 
 2) deployment.yml: creates rolling update deployment 
 3) service.yml: creates ELB
 4) Dockerfile: instructions to assemble Docker image
