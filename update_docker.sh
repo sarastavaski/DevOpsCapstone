@@ -30,7 +30,8 @@ docker tag capstone-containter:latest $dockerpath:v2
 # Push image to docker repository
 docker push sarastavaski/capstone-containter:v2
 
-aws eks --region us-west-1 update-kubeconfig --name capstone-deployment
+# connect to aws and establish credentials
+aws eks --region us-west-1 update-kubeconfig --name capstone-deployment --profile Admin
 
 # trigger rolling update
 kubectl set image deployment/capstone-rolling-update capstone-html-container=sarastavaski/capstone-containter:v2

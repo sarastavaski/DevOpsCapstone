@@ -71,8 +71,6 @@ jobs:
           name: upload docker container
           no_output_timeout: 30m
           command: |
-
-            # ./upload_docker.sh ${DOCKER_USERNAME} ${DOCKER_PASSWORD} ${DOCKERTAG_VERSION}
             ./upload_docker.sh ${DOCKER_USERNAME} ${DOCKER_PASSWORD}
       # - run:
       #     name: start docker container for test
