@@ -180,13 +180,3 @@ workflows:
             - service
 
 
-
-
-
-
-
-  #     - aws-eks/delete-cluster:
-  #         cluster-name: my-eks-demo
-  #         requires:
-  #           - test-cluster
-
